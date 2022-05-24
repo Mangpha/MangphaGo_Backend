@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateAccountInput } from './dtos/create-account.dto';
+import {
+  CreateAccountInput,
+  CreateAccountOutput,
+} from './dtos/create-account.dto';
 import { UserEntity } from './entity/user.entity';
 
 @Injectable()
@@ -14,8 +17,12 @@ export class UserService {
     username,
     email,
     password,
-  }: CreateAccountInput): Promise<string> {
-    return 'a';
+  }: CreateAccountInput): Promise<CreateAccountOutput> {
+    try {
+      return { status: 'ok' };
+    } catch (error) {
+      return { status: 'error', error };
+    }
   }
 
   async getAccount() {

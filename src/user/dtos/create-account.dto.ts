@@ -1,4 +1,5 @@
-import { ArgsType, ObjectType, PickType } from '@nestjs/graphql';
+import { ArgsType, Field, ObjectType, PickType } from '@nestjs/graphql';
+import { CommonDto } from 'src/common/common.dto';
 import { UserEntity } from '../entity/user.entity';
 
 @ArgsType()
@@ -7,3 +8,6 @@ export class CreateAccountInput extends PickType(
   ['username', 'email', 'password'],
   ArgsType,
 ) {}
+
+@ObjectType()
+export class CreateAccountOutput extends CommonDto {}
