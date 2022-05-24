@@ -21,11 +21,11 @@ export class UserService {
     try {
       const findUser = await this.user.findOne({ username });
       if (findUser)
-        return { status: 'error', error: 'Username already exists' };
+        return { status: 'error', message: 'Username already exists' };
       await this.user.save(this.user.create({ username, email, password }));
       return { status: 'ok' };
     } catch (error) {
-      return { status: 'error', error: 'Account creation failed' };
+      return { status: 'error', message: 'Account creation failed' };
     }
   }
 

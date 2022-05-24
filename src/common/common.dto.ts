@@ -6,5 +6,5 @@ export class CommonDto {
   status: string;
 
   @Field((type) => String, { nullable: true })
-  error?: string;
+  message?: string;
 }
