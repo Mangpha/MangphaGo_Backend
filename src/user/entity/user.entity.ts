@@ -19,7 +19,7 @@ export class UserEntity extends CommonEntity {
   email: string;
 
   @Field((type) => String)
-  @Column()
+  @Column({ select: false })
   @Length(8)
   password: string;
 

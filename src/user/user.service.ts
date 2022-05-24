@@ -5,6 +5,7 @@ import {
   CreateAccountInput,
   CreateAccountOutput,
 } from './dtos/create-account.dto';
+import { GetAccountInput, GetAccountOutput } from './dtos/get-account.dto';
 import { UserEntity } from './entity/user.entity';
 
 @Injectable()
@@ -30,8 +31,14 @@ export class UserService {
     }
   }
 
-  async getAccount() {
-    return;
+  async getAccount({ id }: GetAccountInput): Promise<GetAccountOutput> {
+    try {
+      const findUser = await this.user.findOne({ id });
+      if (!findUser) return { status: 'error', message: 'User Not Found' };
+      return { status: 'ok', user: findUser };
+    } catch (error) {
+      return { status: 'error', message: 'User Not Found' };
+    }
   }
 
   async updateAccount() {
