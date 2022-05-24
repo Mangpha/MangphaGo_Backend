@@ -23,21 +23,38 @@ export class UserService {
       const findUsername = await this.user.findOne({ username });
       const findEmail = await this.user.findOne({ email });
       if (findUsername || findEmail)
-        return { status: 'error', message: 'Username already exists' };
+        return {
+          status: 'error',
+          message: 'Username already exists',
+          creationDate: new Date(),
+        };
       await this.user.save(this.user.create({ username, email, password }));
-      return { status: 'ok' };
+      return { status: 'ok', creationDate: new Date() };
     } catch (error) {
-      return { status: 'error', message: 'Account creation failed' };
+      return {
+        status: 'error',
+        message: 'Account creation failed',
+        creationDate: new Date(),
+      };
     }
   }
 
   async getAccount({ id }: GetAccountInput): Promise<GetAccountOutput> {
     try {
       const findUser = await this.user.findOne({ id });
-      if (!findUser) return { status: 'error', message: 'User Not Found' };
-      return { status: 'ok', user: findUser };
+      if (!findUser)
+        return {
+          status: 'error',
+          message: 'User Not Found',
+          creationDate: new Date(),
+        };
+      return { status: 'ok', user: findUser, creationDate: new Date() };
     } catch (error) {
-      return { status: 'error', message: 'User Not Found' };
+      return {
+        status: 'error',
+        message: 'User Not Found',
+        creationDate: new Date(),
+      };
     }
   }
 
