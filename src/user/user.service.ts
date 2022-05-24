@@ -25,7 +25,7 @@ export class UserService {
       if (findUsername || findEmail)
         return {
           status: 'error',
-          message: 'Username already exists',
+          message: 'User already exists',
           creationDate: new Date(),
         };
       await this.user.save(this.user.create({ username, email, password }));
