@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { UserModule } from './user/user.module';
 import * as Joi from 'joi';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from './user/entity/user.entity';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: process.env.DB_PSWD,
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV === 'dev',
-      entities: [],
+      entities: [UserEntity],
+      logging: true,
     }),
     UserModule,
   ],
