@@ -19,8 +19,9 @@ export class UserService {
     password,
   }: CreateAccountInput): Promise<CreateAccountOutput> {
     try {
-      const findUser = await this.user.findOne({ username });
-      if (findUser)
+      const findUsername = await this.user.findOne({ username });
+      const findEmail = await this.user.findOne({ email });
+      if (findUsername || findEmail)
         return { status: 'error', message: 'Username already exists' };
       await this.user.save(this.user.create({ username, email, password }));
       return { status: 'ok' };
