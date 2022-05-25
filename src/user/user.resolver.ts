@@ -24,7 +24,7 @@ export class UserResolver {
   }
 
   @Query((_) => GetAccountOutput)
-  getAccount(@Args() input: GetAccountInput): Promise<GetAccountOutput> {
-    return this.userService.getAccount(input);
+  getAccountById(@Args() input: GetAccountInput): Promise<GetAccountOutput> {
+    return this.userService.getAccountById(input);
   }
 }

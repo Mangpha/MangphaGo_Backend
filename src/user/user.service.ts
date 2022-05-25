@@ -6,6 +6,10 @@ import {
   CreateAccountOutput,
 } from './dtos/create-account.dto';
 import { GetAccountInput, GetAccountOutput } from './dtos/get-account.dto';
+import {
+  UpdateAccountInput,
+  UpdateAccountOutput,
+} from './dtos/update-account.dto';
 import { UserEntity } from './entity/user.entity';
 
 @Injectable()
@@ -42,7 +46,7 @@ export class UserService {
     }
   }
 
-  async getAccount({ id }: GetAccountInput): Promise<GetAccountOutput> {
+  async getAccountById({ id }: GetAccountInput): Promise<GetAccountOutput> {
     try {
       const findUser = await this.user.findOne({ id });
       if (!findUser)
@@ -61,7 +65,12 @@ export class UserService {
     }
   }
 
-  async updateAccount() {
+  async updateAccount({
+    email,
+    password,
+    username,
+    mobile,
+  }: UpdateAccountInput): Promise<UpdateAccountOutput> {
     return;
   }
 
