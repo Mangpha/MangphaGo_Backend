@@ -4,6 +4,10 @@ import {
   CreateAccountOutput,
 } from './dtos/create-account.dto';
 import { GetAccountInput, GetAccountOutput } from './dtos/get-account.dto';
+import {
+  UpdateAccountInput,
+  UpdateAccountOutput,
+} from './dtos/update-account.dto';
 import { UserEntity } from './entity/user.entity';
 import { UserService } from './user.service';
 
@@ -18,13 +22,20 @@ export class UserResolver {
 
   @Mutation((_) => CreateAccountOutput)
   createAccount(
-    @Args() input: CreateAccountInput,
+    @Args() userInput: CreateAccountInput,
   ): Promise<CreateAccountOutput> {
-    return this.userService.createAccount(input);
+    return this.userService.createAccount(userInput);
   }
 
   @Query((_) => GetAccountOutput)
-  getAccountById(@Args() input: GetAccountInput): Promise<GetAccountOutput> {
-    return this.userService.getAccountById(input);
+  getAccountById(@Args() userId: GetAccountInput): Promise<GetAccountOutput> {
+    return this.userService.getAccountById(userId);
+  }
+
+  @Mutation((_) => UpdateAccountOutput)
+  updateAccount(
+    @Args() updateInput: UpdateAccountInput,
+  ): Promise<UpdateAccountOutput> {
+    return this.userService.updateAccount(updateInput);
   }
 }

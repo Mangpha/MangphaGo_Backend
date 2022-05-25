@@ -66,11 +66,31 @@ export class UserService {
   }
 
   async updateAccount({
+    id,
     email,
     password,
     username,
     mobile,
   }: UpdateAccountInput): Promise<UpdateAccountOutput> {
+    try {
+      const findUser = await this.user.findOne({ id });
+      if (email) findUser.email = email;
+      if (password) findUser.password = password;
+      if (username) findUser.username = username;
+      if (mobile) findUser.mobile = mobile;
+      await this.user.save(findUser);
+      return {
+        status: 'ok',
+        creationDate: new Date(),
+      };
+    } catch (error) {
+      return {
+        status: 'error',
+        message: "Couldn't Update user info",
+        creationDate: new Date(),
+      };
+    }
+
     return;
   }
 

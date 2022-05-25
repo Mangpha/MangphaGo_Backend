@@ -26,6 +26,7 @@ export class UserEntity extends CommonEntity {
   @Field((type) => String)
   @Column()
   @IsString()
+  @Length(11, 11)
   mobile: string;
 
   @BeforeInsert()
