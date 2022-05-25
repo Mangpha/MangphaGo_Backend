@@ -23,6 +23,11 @@ export class UserEntity extends CommonEntity {
   @Length(8)
   password: string;
 
+  @Field((type) => String)
+  @Column()
+  @IsString()
+  mobile: string;
+
   @BeforeInsert()
   @BeforeUpdate()
   async hashing(): Promise<void> {

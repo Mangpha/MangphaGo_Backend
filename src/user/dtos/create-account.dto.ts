@@ -5,7 +5,7 @@ import { UserEntity } from '../entity/user.entity';
 @ArgsType()
 export class CreateAccountInput extends PickType(
   UserEntity,
-  ['username', 'email', 'password'],
+  ['username', 'email', 'password', 'mobile'],
   ArgsType,
 ) {}
 

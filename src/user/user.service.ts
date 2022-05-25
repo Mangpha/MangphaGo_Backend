@@ -18,6 +18,7 @@ export class UserService {
     username,
     email,
     password,
+    mobile,
   }: CreateAccountInput): Promise<CreateAccountOutput> {
     try {
       const findUsername = await this.user.findOne({ username });
@@ -28,7 +29,9 @@ export class UserService {
           message: 'User already exists',
           creationDate: new Date(),
         };
-      await this.user.save(this.user.create({ username, email, password }));
+      await this.user.save(
+        this.user.create({ username, email, password, mobile }),
+      );
       return { status: 'ok', creationDate: new Date() };
     } catch (error) {
       return {
