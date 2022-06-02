@@ -5,6 +5,10 @@ import {
   CreateAccountInput,
   CreateAccountOutput,
 } from './dtos/create-account.dto';
+import {
+  DeleteAccountInput,
+  DeleteAccountOutput,
+} from './dtos/delete.account.dto';
 import { GetAccountInput, GetAccountOutput } from './dtos/get-account.dto';
 import {
   UpdateAccountInput,
@@ -90,11 +94,23 @@ export class UserService {
         creationDate: new Date(),
       };
     }
-
-    return;
   }
 
-  async deleteAccount() {
-    return;
+  async deleteAccount({
+    id,
+  }: DeleteAccountInput): Promise<DeleteAccountOutput> {
+    try {
+      await this.user.delete({ id });
+      return {
+        status: 'ok',
+        creationDate: new Date(),
+      };
+    } catch (error) {
+      return {
+        status: 'error',
+        message: "Couldn't Delete User",
+        creationDate: new Date(),
+      };
+    }
   }
 }

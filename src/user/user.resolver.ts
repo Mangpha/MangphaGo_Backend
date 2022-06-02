@@ -3,6 +3,10 @@ import {
   CreateAccountInput,
   CreateAccountOutput,
 } from './dtos/create-account.dto';
+import {
+  DeleteAccountInput,
+  DeleteAccountOutput,
+} from './dtos/delete.account.dto';
 import { GetAccountInput, GetAccountOutput } from './dtos/get-account.dto';
 import {
   UpdateAccountInput,
@@ -37,5 +41,12 @@ export class UserResolver {
     @Args() updateInput: UpdateAccountInput,
   ): Promise<UpdateAccountOutput> {
     return this.userService.updateAccount(updateInput);
+  }
+
+  @Mutation((_) => DeleteAccountOutput)
+  deleteAccount(
+    @Args() userId: DeleteAccountInput,
+  ): Promise<DeleteAccountOutput> {
+    return this.userService.deleteAccount(userId);
   }
 }
